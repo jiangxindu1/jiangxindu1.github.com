@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta charset="utf-8" />
+<style type="text/css">
+.test,#testa{
+	width:100px;
+	height:100px;
+	line-height:100px;
+	margin-bottom:10px;
+	background-color:blue;
+	text-align:center;
+	color:white;
+}
+</style>
+<script type="application/javascript" src="fastclick.js"></script>
+<script type="application/javascript" src="iu.touch.js"></script>
+<script type="application/javascript">
+	window.addEventListener('load', function() {
+		var testA, testB, teTime, cTime;
+		testA = document.getElementById('testa');
+		testB = document.getElementById('testb');
+		//FastClick.attach(testB);
+		FastClick.attach(document.body);
+		//FastClick.attach(testA);
+
+		testA.addEventListener('click', function(event) {
+			ctime = Date.now();
+			document.getElementById('textc').value = ctime;
+		}, false);
+
+
+		testA.addEventListener('touchstart', function(event) {
+			stime = Date.now();
+			document.getElementById('texta').value = stime;
+		}, false);
+
+		testA.addEventListener('touchend', function(event) {
+			var etime = Date.now();
+			document.getElementById('textb').value=etime;
+		}, false);
+
+
+		testB.addEventListener('click', function(event) {
+			ctime = Date.now();
+			document.getElementById('textc').value =ctime;
+		}, false);
+
+		iu.touch(testB, 'touchstart', function(e) {
+			var etime = Date.now();
+			document.getElementById('texta').value=etime;
+		});
+		iu.touch(testB, 'slideleftover', function(e) {
+			document.getElementById('textf').value='slideleftover'+e.distancex;
+		});
+		iu.touch(testB, 'sliderightover', function(e) {
+			document.getElementById('textf').value='sliderightover'+e.distancex;
+		});
+		iu.touch(testB, 'slideupover', function(e) {
+			document.getElementById('textf').value='slideupover'+e.distancey;
+		});
+		iu.touch(testB, 'slidedownover', function(e) {
+			document.getElementById('textf').value='slidedownover'+e.distancey;
+		});
+
+		iu.touch(testB, 'slideleftend', function(e) {
+			alert("slideleftend" + e.distancex);
+		});
+		iu.touch(testB, 'sliderightend', function(e) {
+			alert("sliderightend");
+		});
+		iu.touch(testB, 'slideupend', function(e) {
+			alert("slideupend");
+		});
+		iu.touch(testB, 'slidedownend', function(e) {
+			alert("slidedownend"+e.distancey);
+		});
+
+		iu.touch(testB, 'click', function(e) {
+			var etime = Date.now();
+			document.getElementById('textd').value=etime;
+		});
+		iu.touch(testB, 'slidedown', function(e) {
+			var etime = Date.now();
+			document.getElementById('textd').value=e.direction+">>"+e.distancex;
+		});
+		iu.touch(testB, 'slideup', function(e) {
+			var etime = Date.now();
+			document.getElementById('textd').value=e.direction+">>"+e.distancex;
+		});
+		iu.touch(testB, 'slide', function(e) {
+			var etime = Date.now();
+			document.getElementById('texte').value=e.direction+">>"+e.distancex;
+		});
+		iu.touch(testB, 'slideright', function(e) {
+			var etime = Date.now();
+			document.getElementById('textd').value=e.direction+">>"+e.distancex;
+		});
+		iu.touch(testB, 'slideleft', function(e) {
+			var etime = Date.now();
+			document.getElementById('textd').value=e.direction+">>"+e.distancex;
+		});
+		iu.touch(testB, 'touchend', function(e) {
+			var etime = Date.now();
+			document.getElementById('textb').value=etime;
+		});
+		// iu.touch(testB, 'longclick', function(e) {
+		// 	var etime = Date.now();
+		// 	document.getElementById('textd').value='longclick_touch'+etime;
+		// });
+	}, false);
+</script>
+</head>
+<body>
+	<div class="testdiv">
+		<span>fastclick 与 不用fast的click的比较</span>
+		<div class="touchandclickevent" id="testa">fast-click</div>
+		<span>fastclick 与 touch事件的比较</span>
+		<div class="test" id="testb">fast-touch</div>			
+	</div>
+	<div class="textdiv">
+		touchstart-time:<input type="text" id="texta"><br/>
+		touchend-time:&nbsp;<input type="text" id="textb"><br/>
+		fastclicktime:&nbsp;<input type="text" id="textc"><br/>
+		touchclick-time:<input type="text" id="textd"><br/>
+		touchslide-time:<input type="text" id="texte">
+		touchslideover: <input type="text" id="textf">
+	</div>
+</body>
+</html>
