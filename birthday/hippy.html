@@ -139,7 +139,6 @@
         var hold = 1;
 
         canvas.click(function (e) {
-        	audio.play();
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
@@ -149,12 +148,13 @@
                 canvas.unbind("mousemove");
                 canvas.removeClass('hand');
             }
+            	audio.play();
         }).mousemove(function (e) {
-        	audio.play();
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
             canvas.toggleClass('hand', seed.hover(x, y));
+            	audio.play();
         });
 
         var seedAnimate = eval(Jscex.compile("async", function () {
