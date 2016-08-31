@@ -87,7 +87,9 @@
     (function () {
     	var audio = $('#audio');
         var canvas = $('#canvas');
-
+document.addEventListener('touchstart', function(){ 
+    audio.play();
+}, false);
         if (!canvas[0].getContext) {
             $("#error").show();
             return false;
@@ -148,13 +150,11 @@
                 canvas.unbind("mousemove");
                 canvas.removeClass('hand');
             }
-            	audio.play();
         }).mousemove(function (e) {
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
             canvas.toggleClass('hand', seed.hover(x, y));
-            	audio.play();
         });
 
         var seedAnimate = eval(Jscex.compile("async", function () {
