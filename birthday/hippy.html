@@ -153,10 +153,9 @@
             y = e.pageY - offset.top;
             canvas.toggleClass('hand', seed.hover(x, y));
         });
-
-	canvas.touchend(function(e) {
-		audio.play();	
-	});
+	canvas.live('taphole', function() {  
+       	audio.play();
+      });
         var seedAnimate = eval(Jscex.compile("async", function () {
             seed.draw();
             while (hold) {
