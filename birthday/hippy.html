@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<audio autoplay="autoplay" loop="loop" height="100" width="100">
+<audio id="audio" autoplay="autoplay" loop="loop" height="100" width="100">
             <source src="hippybirthday.mp3" type="audio/mp3" />
             <source src="hippybirthday.ogg" type="audio/ogg" />
             <embed height="100" width="100" src="hippybirthday.mp3" />
@@ -85,6 +85,7 @@
     </script>
 <script>
     (function () {
+    	var audio = $('#audio');
         var canvas = $('#canvas');
 
         if (!canvas[0].getContext) {
@@ -138,6 +139,7 @@
         var hold = 1;
 
         canvas.click(function (e) {
+        	audio.play();
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
@@ -148,6 +150,7 @@
                 canvas.removeClass('hand');
             }
         }).mousemove(function (e) {
+        	audio.play();
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
