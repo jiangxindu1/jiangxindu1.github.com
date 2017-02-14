@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-<audio autoplay="autoplay" loop="loop" height="100" width="100">
+<audio id="audio" autoplay="autoplay" loop="loop" height="100" width="100">
             <source src="hippybirthday.mp3" type="audio/mp3" />
             <source src="hippybirthday.ogg" type="audio/ogg" />
             <embed height="100" width="100" src="hippybirthday.mp3" />
@@ -75,7 +75,7 @@
     </div>
     
     
-    <div id="clock-box"> <span class="STYLE1"></span><font color="#FF4500">亲爱的宝宝，我爱你</font> <span class="STYLE1">认识你已经是……</span>
+    <div id="clock-box"> <span class="STYLE1">亲爱的宝宝，我爱你</span><span class="STYLE1">认识你已经是……</span>
       <div id="clock"></div>
     </div>
     <canvas id="canvas" width="1100" height="680"></canvas>
@@ -85,8 +85,8 @@
     </script>
 <script>
     (function () {
+    	var audio = $('#audio');
         var canvas = $('#canvas');
-
         if (!canvas[0].getContext) {
             $("#error").show();
             return false;
@@ -153,7 +153,9 @@
             y = e.pageY - offset.top;
             canvas.toggleClass('hand', seed.hover(x, y));
         });
-
+	canvas.live('taphole', function() {  
+       	audio.play();
+      });
         var seedAnimate = eval(Jscex.compile("async", function () {
             seed.draw();
             while (hold) {
